@@ -9,7 +9,11 @@ Gem::Specification.new do |gem|
   gem.summary       = "A logging library."
   gem.homepage      = "http://www.cloudfoundry.org"
 
-  gitignore = File.readlines(".gitignore").grep(/^[^#]/).map { |s| s.chomp }
+  if File.exists? ".gitignore"
+    gitignore = File.readlines(".gitignore").grep(/^[^#]/).map { |s| s.chomp }
+  else
+    gitignore = ["spec/reports", ".idea/"]
+  end
 
   # Ignore Gemfile, this is a library
   gitignore << "Gemfile*"
